@@ -7,12 +7,11 @@ import datetime as dt
 warnings.filterwarnings("ignore")
 
 
-data = pd.read_csv("data.csv")
+data = pd.read_csv("data.csv", encoding="ISO-8859-1", dtype={'CustomerID': str, 'InvoiceNO': str})
 data = data.dropna()
 print(data.shape)
 print(list(data.columns))
 data.head()
-data = pd.read_csv("data.csv", encoding="ISO-8859-1", dtype={'CustomerID': str, 'InvoiceNO': str})
 print(data.shape)
 data = data.dropna()
 print(data.shape)
