@@ -27,3 +27,9 @@ print('duplicate entries: {}'.format(data.duplicated().sum()))
 
 # take a look at value counts
 pd.DataFrame([{'products': len(data['StockCode'].value_counts()), 'transactions': len(data['InvoiceNo'].value_counts()), 'customers': len(data['CustomerID'].value_counts()), }], columns = ['products', 'transactions', 'customers'])
+
+# now groupby customer to count items per invoice (per order)
+tmp = data.groupby(by=['CustomerID', 'InvoiceNo'], as_index=False)['InvoiceDate'].count()
+tmp.head()
+number_prod_per_basket = tmp.rename(columns = {'InvoiceDate':'Number_of_products'})
+print(number_prod_per_basket[:10].sort_values('CustomerID'))
